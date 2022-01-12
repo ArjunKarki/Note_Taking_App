@@ -1,3 +1,4 @@
+import {useTheme} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import {FAB, Text} from 'react-native-paper';
@@ -7,6 +8,7 @@ import ArchiveNote from './ArchiveNote';
 import FavouritNotes from './FavouritNotes';
 
 const Notes = props => {
+  const {colors, dark} = useTheme();
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     {key: 'All', title: 'All'},
@@ -25,24 +27,40 @@ const Notes = props => {
     }
   };
 
+  const onCreateNote = () => {};
+
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: colors.main}}>
       <TabView
         navigationState={{index, routes}}
         renderScene={renderScene}
         onIndexChange={setIndex}
         renderTabBar={props => (
           <TabBar
-            indicatorStyle={{backgroundColor: 'red'}}
+            indicatorStyle={{
+              backgroundColor: dark ? '#1D9457' : '#fff',
+              height: 3,
+            }}
             renderLabel={({route, focused, color}) => (
-              <Text style={{color: focused ? 'red' : 'green', margin: 8}}>
+              <Text
+                style={{
+                  color: focused ? (dark ? '#1D9457' : '#fff') : color,
+                  margin: 8,
+                  fontWeight: 'bold',
+                  fontSize: 16,
+                }}>
                 {route.title}
               </Text>
             )}
-            style={{backgroundColor: 'white'}}
+            style={{backgroundColor: colors.main}}
             {...props}
           />
         )}
+      />
+      <FAB
+        style={[styles.fab, {backgroundColor: colors.main}]}
+        icon="plus"
+        onPress={onCreateNote}
       />
     </SafeAreaView>
   );
@@ -50,4 +68,11 @@ const Notes = props => {
 
 export default Notes;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  },
+});

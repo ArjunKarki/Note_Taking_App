@@ -1,9 +1,12 @@
+import {useTheme} from '@react-navigation/native';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import {Text} from 'react-native-paper';
 
 const AllNotes = () => {
+  const {colors} = useTheme();
   return (
-    <View>
+    <View style={{backgroundColor: colors.background, flex: 1}}>
       <Text>AllNotes</Text>
     </View>
   );
