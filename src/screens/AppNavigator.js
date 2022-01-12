@@ -7,6 +7,7 @@ import {StyleSheet} from 'react-native';
 import CreateNote from './CreateNote';
 import Notes from './Notes';
 import Setting from './Setting';
+import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -41,7 +42,7 @@ const HomeTabs = () => {
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="home" component={HomeTabs} />
         <Stack.Screen name="CreateNote" component={CreateNote} />
       </Stack.Navigator>
