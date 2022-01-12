@@ -19,6 +19,7 @@ import {
   DarkTheme as PaperDarkTheme,
   Provider as PaperProvider,
 } from 'react-native-paper';
+import {useSelector} from 'react-redux';
 
 const DefaultTheme = {
   ...PaperDefaultTheme,
@@ -27,6 +28,7 @@ const DefaultTheme = {
     ...PaperDefaultTheme.colors,
     ...NavigationDefaultTheme.colors,
     main: '#1D9457',
+    background: '#fff',
   },
 };
 
@@ -45,9 +47,12 @@ const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const HomeTabs = () => {
-  const {colors} = useTheme();
+  const {colors, dark} = useTheme();
   return (
-    <Tab.Navigator barStyle={{backgroundColor: colors.main}}>
+    <Tab.Navigator
+      activeColor={dark ? '#1D9457' : '#fff'}
+      inactiveColor={dark ? '#fff' : '#AEB6BF'}
+      barStyle={{backgroundColor: colors.main}}>
       <Tab.Screen
         name="Notes"
         component={Notes}
@@ -73,11 +78,13 @@ const HomeTabs = () => {
 };
 
 const AppNavigator = () => {
+  const {darkTheme} = useSelector(state => state.theme);
+  let theme = darkTheme ? DarkTheme : DefaultTheme;
   return (
-    <PaperProvider theme={DefaultTheme}>
+    <PaperProvider theme={theme}>
       <View style={{flex: 1}}>
         <StatusBar barStyle={'light-content'} />
-        <NavigationContainer theme={DefaultTheme}>
+        <NavigationContainer theme={theme}>
           <Stack.Navigator>
             <Stack.Screen
               options={{headerShown: false}}
