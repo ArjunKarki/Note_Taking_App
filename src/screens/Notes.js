@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import {FAB, Text} from 'react-native-paper';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
+import {useSelector} from 'react-redux';
 import AllNotes from './AllNotes';
 import ArchiveNote from './ArchiveNote';
 import FavouritNotes from './FavouritNotes';
@@ -10,6 +11,7 @@ import FavouritNotes from './FavouritNotes';
 const Notes = props => {
   const {colors, dark} = useTheme();
   const [index, setIndex] = useState(0);
+  const state = useSelector(state => state);
   const [routes] = useState([
     {key: 'All', title: 'All'},
     {key: 'Favourit', title: 'Favourit'},
