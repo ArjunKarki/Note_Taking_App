@@ -10,8 +10,8 @@ import FavouritNotes from './FavouritNotes';
 
 const Notes = props => {
   const {colors, dark} = useTheme();
+  const styles = getStyles(colors, dark);
   const [index, setIndex] = useState(0);
-  const state = useSelector(state => state);
   const [routes] = useState([
     {key: 'All', title: 'All'},
     {key: 'Favourite', title: 'Favourite'},
@@ -34,25 +34,20 @@ const Notes = props => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.main}}>
+    <SafeAreaView style={styles.container}>
       <TabView
         navigationState={{index, routes}}
         renderScene={renderScene}
         onIndexChange={setIndex}
         renderTabBar={props => (
           <TabBar
-            indicatorStyle={{
-              backgroundColor: dark ? '#1D9457' : '#fff',
-              height: 3,
-            }}
+            indicatorStyle={styles.tabBarIndicator}
             renderLabel={({route, focused, color}) => (
               <Text
-                style={{
-                  color: focused ? (dark ? '#1D9457' : '#fff') : color,
-                  margin: 8,
-                  fontWeight: 'bold',
-                  fontSize: 16,
-                }}>
+                style={[
+                  styles.tabLabel,
+                  {color: focused ? (dark ? '#1D9457' : '#fff') : color},
+                ]}>
                 {route.title}
               </Text>
             )}
@@ -61,22 +56,30 @@ const Notes = props => {
           />
         )}
       />
-      <FAB
-        style={[styles.fab, {backgroundColor: colors.main}]}
-        icon="plus"
-        onPress={onCreateNote}
-      />
+      <FAB style={[styles.fab]} icon="plus" onPress={onCreateNote} />
     </SafeAreaView>
   );
 };
 
 export default Notes;
 
-const styles = StyleSheet.create({
-  fab: {
-    position: 'absolute',
-    margin: 16,
-    right: 0,
-    bottom: 0,
-  },
-});
+const getStyles = (colors, dark) =>
+  StyleSheet.create({
+    fab: {
+      position: 'absolute',
+      margin: 16,
+      right: 0,
+      bottom: 0,
+      backgroundColor: '#1D9457',
+    },
+    container: {flex: 1, backgroundColor: colors.main},
+    tabBarIndicator: {
+      backgroundColor: dark ? '#1D9457' : '#fff',
+      height: 3,
+    },
+    tabLabel: {
+      margin: 8,
+      fontWeight: 'bold',
+      fontSize: 16,
+    },
+  });
