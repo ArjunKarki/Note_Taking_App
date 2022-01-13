@@ -48,7 +48,7 @@ export default NoteCard;
 const getStyles = (colors, dark) =>
   StyleSheet.create({
     container: {
-      width: utils.width * 0.44,
+      width: utils.width * 0.45,
       justifyContent: 'space-between',
       //   minHeight: 30,
       marginBottom: 10,
