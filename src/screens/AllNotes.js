@@ -4,7 +4,7 @@ import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Text} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
 import {NoteCard} from '../components';
-import {toggleFavourite} from '../redux/actions/noteActions';
+import {toggleArchive, toggleFavourite} from '../redux/actions/noteActions';
 
 const AllNotes = () => {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const AllNotes = () => {
       <FlatList
         numColumns={2}
         keyExtractor={(v, i) => v.id}
-        data={allNotes || []}
+        data={allNotes.filter(note => !note.is_archive) || []}
         renderItem={renderNotes}
         columnWrapperStyle={{justifyContent: 'space-between', marginTop: 10}}
       />

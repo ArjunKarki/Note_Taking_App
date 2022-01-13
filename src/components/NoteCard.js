@@ -2,14 +2,12 @@ import React from 'react';
 import {StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
 import {Text, useTheme} from 'react-native-paper';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
-import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import utils from '../utilities/utils';
-import moment from 'moment';
 
-const NoteCard = ({notes, onPress, toggleFav}) => {
+const NoteCard = ({notes, onPress, toggleFav, togleArchive}) => {
   const {colors, dark} = useTheme();
   const styles = getStyles(colors, dark);
-  let {title, body, is_favourite, created_at, updated_at} = notes;
+  let {title, body, is_favourite, created_at, updated_at, is_archive} = notes;
   let time = updated_at ? updated_at : created_at;
 
   return (
@@ -21,13 +19,19 @@ const NoteCard = ({notes, onPress, toggleFav}) => {
         <Text numberOfLines={1} style={styles.title}>
           {title}
         </Text>
-        <TouchableOpacity onPress={toggleFav}>
-          {is_favourite ? (
-            <MIcon name="bookmark" size={20} color={'#1D9457'} />
-          ) : (
-            <MIcon name="bookmark-border" size={20} color={'#1D9457'} />
-          )}
-        </TouchableOpacity>
+        {togleArchive ? (
+          <TouchableOpacity onPress={togleArchive}>
+            <MIcon name="unarchive" size={20} color={'#1D9457'} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity onPress={toggleFav}>
+            {is_favourite ? (
+              <MIcon name="bookmark" size={20} color={'#1D9457'} />
+            ) : (
+              <MIcon name="bookmark-border" size={20} color={'#1D9457'} />
+            )}
+          </TouchableOpacity>
+        )}
       </View>
       <Text numberOfLines={4} style={styles.body}>
         {body}
@@ -56,7 +60,7 @@ const getStyles = (colors, dark) =>
     },
     title: {
       flex: 1,
-      marginRight: 2,
+      marginRight: 5,
       fontWeight: '500',
       fontSize: 18,
     },
