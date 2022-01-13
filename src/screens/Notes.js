@@ -14,7 +14,7 @@ const Notes = props => {
   const state = useSelector(state => state);
   const [routes] = useState([
     {key: 'All', title: 'All'},
-    {key: 'Favourit', title: 'Favourit'},
+    {key: 'Favourite', title: 'Favourite'},
     {key: 'Archived', title: 'Archived'},
   ]);
 
@@ -22,7 +22,7 @@ const Notes = props => {
     switch (route.key) {
       case 'All':
         return <AllNotes {...props} />;
-      case 'Favourit':
+      case 'Favourite':
         return <FavouritNotes {...props} />;
       case 'Archived':
         return <ArchiveNote {...props} />;
