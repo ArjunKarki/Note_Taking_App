@@ -44,25 +44,37 @@ const CreateNote = ({navigation}) => {
         </TouchableOpacity>
         <Text style={styles.headerText}>{utils.formattedDate()}</Text>
         <View style={styles.actionView}>
-          {focus ? (
-            <TouchableOpacity onPress={onSave}>
-              <MCIcon
-                name="check"
-                size={25}
-                style={{marginRight: 10}}
-                color={colors.text}
-              />
-            </TouchableOpacity>
-          ) : (
-            <View style={styles.actionBtnView}>
-              <TouchableOpacity style={{marginRight: 15}}>
-                {/* <MIcon name="unarchive" size={20} color={colors.text} /> */}
-                <MCIcon name="archive-outline" size={20} color={colors.text} />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <MIcon name="bookmark-border" color={colors.text} size={20} />
-              </TouchableOpacity>
-            </View>
+          {!!(title || body) && (
+            <>
+              {focus ? (
+                <TouchableOpacity onPress={onSave}>
+                  <MCIcon
+                    name="check"
+                    size={25}
+                    style={{marginRight: 10}}
+                    color={colors.text}
+                  />
+                </TouchableOpacity>
+              ) : (
+                <View style={styles.actionBtnView}>
+                  <TouchableOpacity style={{marginRight: 15}}>
+                    {/* <MIcon name="unarchive" size={20} color={colors.text} /> */}
+                    <MCIcon
+                      name="archive-outline"
+                      size={20}
+                      color={colors.text}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <MIcon
+                      name="bookmark-border"
+                      color={colors.text}
+                      size={20}
+                    />
+                  </TouchableOpacity>
+                </View>
+              )}
+            </>
           )}
         </View>
       </View>
@@ -88,7 +100,7 @@ const CreateNote = ({navigation}) => {
           style={styles.bodyInput}
         />
       </View>
-      <FAB style={[styles.fab]} icon="delete" onPress={onDelete} />
+      {/* <FAB style={[styles.fab]} icon="delete" onPress={onDelete} /> */}
     </SafeAreaView>
   );
 };
