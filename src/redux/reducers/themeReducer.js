@@ -1,7 +1,7 @@
 import {CHANGE_THEME} from '../const';
 
 const INITIAL_STATE = {
-  darkTheme: true,
+  darkTheme: false,
 };
 const themeReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {

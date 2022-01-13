@@ -10,7 +10,7 @@ export const saveNote = (title, body) => (dispatch, getState) => {
     body,
     created_at: new Date(),
     updated_at: null,
-    is_favourit: false,
+    is_favourite: false,
     is_archived: false,
   };
   console.log(note);

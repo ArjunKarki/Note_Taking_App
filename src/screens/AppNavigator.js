@@ -12,6 +12,7 @@ import {StatusBar, StyleSheet, View} from 'react-native';
 import CreateNote from './CreateNote';
 import Notes from './Notes';
 import Setting from './Setting';
+import {Text} from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
 import {
@@ -31,6 +32,9 @@ const DefaultTheme = {
     background: '#fff',
     delete: '#FF0000',
     placeholder: '#BDC3C7',
+    card: '#F2F3F4',
+    textGray: '#424949',
+    textGray1: '#616A6B',
   },
 };
 
@@ -43,6 +47,9 @@ const DarkTheme = {
     main: '#424949',
     delete: '#FF0000',
     placeholder: '#566573',
+    card: '#424949',
+    textGray: '#CCD1D1',
+    textGray1: '#99A3A4',
   },
 };
 
@@ -60,7 +67,9 @@ const HomeTabs = () => {
         name="Notes"
         component={Notes}
         options={{
-          tabBarLabel: 'Notes',
+          tabBarLabel: (
+            <Text style={{fontWeight: 'bold', fontSize: 12}}>Notes</Text>
+          ),
           tabBarIcon: ({color}) => (
             <MIcon name="notes" color={color} size={26} />
           ),
