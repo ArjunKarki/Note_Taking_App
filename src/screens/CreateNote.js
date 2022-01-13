@@ -13,7 +13,13 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import utils from '../utilities/utils';
 import {useTheme} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {deleteNote, saveNote, updateNote} from '../redux/actions/noteActions';
+import {
+  deleteNote,
+  saveNote,
+  toggleArchive,
+  toggleFavourite,
+  updateNote,
+} from '../redux/actions/noteActions';
 
 const CreateNote = ({navigation, route}) => {
   const {allNotes} = useSelector(state => state.notes);
@@ -22,34 +28,32 @@ const CreateNote = ({navigation, route}) => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [focus, setFocus] = useState(false);
-  const [oldNote, setOldNote] = useState(route?.params?.note);
+  const [note, setNote] = useState(null);
   const styles = getStyles(colors, dark);
-
   useEffect(() => {
-    if (oldNote) {
-      setTitle(oldNote.title);
-      setBody(oldNote.body);
+    let id = route.params?.id;
+    if (id) {
+      let note = allNotes.filter(note => note.id == id)[0];
+      setTitle(note.title);
+      setBody(note.body);
+      setNote(note);
     }
-  }, []);
-
-  const updateCurrentNote = id => {
-    oldNote = allNotes.filter(note => note.id == id)[0];
-  };
+  }, [allNotes]);
 
   const goBack = () => {
     navigation.goBack();
   };
 
   const onDelete = () => {
-    dispatch(deleteNote(oldNote.id));
+    dispatch(deleteNote(note.id));
     goBack();
   };
 
   const onSave = () => {
     Keyboard.dismiss();
     setFocus(false);
-    if (oldNote) {
-      dispatch(updateNote(title, body, oldNote.id));
+    if (note) {
+      dispatch(updateNote(title, body, note.id));
     } else {
       let newNote = {
         id: new Date().getTime(),
@@ -61,16 +65,25 @@ const CreateNote = ({navigation, route}) => {
         is_archive: false,
       };
       dispatch(saveNote(newNote));
-      setOldNote(newNote);
+      navigation.setParams({id: newNote.id});
     }
   };
+
+  const onToggleFav = () => {
+    dispatch(toggleFavourite(note));
+  };
+
+  const onToggleArchive = () => {
+    dispatch(toggleArchive(note));
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={goBack} style={{flex: 1}}>
           <MIcon name="arrow-back-ios" color={colors.text} size={20} />
         </TouchableOpacity>
-        {!oldNote && (
+        {!note && (
           <Text style={styles.headerText}>{utils.formattedDate()}</Text>
         )}
         <View style={styles.actionView}>
@@ -87,8 +100,10 @@ const CreateNote = ({navigation, route}) => {
                 </TouchableOpacity>
               ) : (
                 <View style={styles.actionBtnView}>
-                  <TouchableOpacity style={{marginRight: 15}}>
-                    {oldNote.is_archive ? (
+                  <TouchableOpacity
+                    onPress={onToggleArchive}
+                    style={{marginRight: 15}}>
+                    {note?.is_archive ? (
                       <MIcon name="unarchive" size={20} color={colors.text} />
                     ) : (
                       <MCIcon
@@ -98,8 +113,8 @@ const CreateNote = ({navigation, route}) => {
                       />
                     )}
                   </TouchableOpacity>
-                  <TouchableOpacity>
-                    {oldNote.is_favourite ? (
+                  <TouchableOpacity onPress={onToggleFav}>
+                    {note?.is_favourite ? (
                       <MIcon name="bookmark" color={colors.text} size={20} />
                     ) : (
                       <MIcon
@@ -117,10 +132,10 @@ const CreateNote = ({navigation, route}) => {
       </View>
 
       <View style={styles.contentView}>
-        {oldNote && (
+        {note && (
           <View>
             <Text style={styles.oldTime}>
-              last updated at {utils.formattedDateTime(oldNote.created_at)}
+              last updated at {utils.formattedDateTime(note?.created_at)}
             </Text>
           </View>
         )}
@@ -145,7 +160,7 @@ const CreateNote = ({navigation, route}) => {
           style={styles.bodyInput}
         />
       </View>
-      {oldNote && <FAB style={[styles.fab]} icon="delete" onPress={onDelete} />}
+      {note && <FAB style={[styles.fab]} icon="delete" onPress={onDelete} />}
     </SafeAreaView>
   );
 };

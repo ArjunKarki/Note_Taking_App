@@ -68,7 +68,6 @@ export const updateNote = (title, body, id) => (dispatch, getState) => {
       return {...item};
     }
   });
-  console.log(newNotes);
   dispatch({
     type: UPDATE_NOTE,
     payload: newNotes,

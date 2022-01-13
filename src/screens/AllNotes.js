@@ -13,7 +13,7 @@ const AllNotes = ({navigation}) => {
   const {allNotes} = useSelector(state => state.notes);
 
   const onClickNote = note => {
-    navigation.navigate('CreateNote', {note});
+    navigation.navigate('CreateNote', {id: note.id});
   };
   const onToggleFav = note => {
     dispatch(toggleFavourite(note));
