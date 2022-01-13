@@ -29,7 +29,9 @@ const Notes = props => {
     }
   };
 
-  const onCreateNote = () => {};
+  const onCreateNote = () => {
+    props.navigation.navigate('CreateNote');
+  };
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.main}}>

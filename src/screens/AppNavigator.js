@@ -29,6 +29,8 @@ const DefaultTheme = {
     ...NavigationDefaultTheme.colors,
     main: '#1D9457',
     background: '#fff',
+    delete: '#FF0000',
+    placeholder: '#BDC3C7',
   },
 };
 
@@ -38,8 +40,9 @@ const DarkTheme = {
   colors: {
     ...PaperDarkTheme.colors,
     ...NavigationDarkTheme.colors,
-    // main: '#1D9457',
     main: '#424949',
+    delete: '#FF0000',
+    placeholder: '#566573',
   },
 };
 
@@ -85,12 +88,8 @@ const AppNavigator = () => {
       <View style={{flex: 1}}>
         <StatusBar barStyle={'light-content'} />
         <NavigationContainer theme={theme}>
-          <Stack.Navigator>
-            <Stack.Screen
-              options={{headerShown: false}}
-              name="home"
-              component={HomeTabs}
-            />
+          <Stack.Navigator screenOptions={{headerShown: false}}>
+            <Stack.Screen name="home" component={HomeTabs} />
             <Stack.Screen
               options={{}}
               name="CreateNote"
