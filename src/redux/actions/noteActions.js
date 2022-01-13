@@ -10,7 +10,6 @@ export const saveNote = note => (dispatch, getState) => {
     notes: {allNotes},
   } = getState();
 
-  console.log(note);
   dispatch({
     type: CREATE_NOTE,
     payload: [...allNotes, note],

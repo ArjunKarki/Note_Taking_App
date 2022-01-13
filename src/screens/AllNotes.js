@@ -34,8 +34,8 @@ const AllNotes = ({navigation}) => {
         keyExtractor={(v, i) => v.id}
         data={allNotes.filter(note => !note.is_archive) || []}
         renderItem={renderNotes}
-        style={{paddingHorizontal: 12}}
-        columnWrapperStyle={{justifyContent: 'space-between', marginTop: 10}}
+        style={{paddingHorizontal: 12, marginTop: 10}}
+        columnWrapperStyle={{justifyContent: 'space-between'}}
       />
     </View>
   );

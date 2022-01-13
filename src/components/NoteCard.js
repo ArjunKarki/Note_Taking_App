@@ -50,13 +50,10 @@ const getStyles = (colors, dark) =>
     container: {
       width: utils.width * 0.45,
       justifyContent: 'space-between',
-      //   minHeight: 30,
       marginBottom: 10,
       padding: 10,
       backgroundColor: colors.card,
-      //   maxHeight: utils.height * 0.22,
       borderRadius: 10,
-      overflow: 'hidden',
     },
     title: {
       flex: 1,
