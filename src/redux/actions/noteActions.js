@@ -1,18 +1,10 @@
-import {CREATE_NOTE, TOGGLE_FAVOURITE} from '../const';
+import {CREATE_NOTE, TOGGLE_FAVOURITE, UPDATE_NOTE} from '../const';
 
-export const saveNote = (title, body) => (dispatch, getState) => {
+export const saveNote = note => (dispatch, getState) => {
   let {
     notes: {allNotes},
   } = getState();
-  let note = {
-    id: new Date().getTime(),
-    title,
-    body,
-    created_at: new Date(),
-    updated_at: null,
-    is_favourite: false,
-    is_archive: false,
-  };
+
   console.log(note);
   dispatch({
     type: CREATE_NOTE,
@@ -50,6 +42,30 @@ export const toggleArchive = note => (dispatch, getState) => {
 
   dispatch({
     type: TOGGLE_FAVOURITE,
+    payload: newNotes,
+  });
+};
+
+export const updateNote = (title, body, id) => (dispatch, getState) => {
+  let {
+    notes: {allNotes},
+  } = getState();
+  let note = {
+    title,
+    body,
+    created_at: new Date(),
+    updated_at: new Date(),
+  };
+  let newNotes = allNotes.map((item, index) => {
+    if (item.id == id) {
+      return {...item, ...note};
+    } else {
+      return {...item};
+    }
+  });
+  console.log(newNotes);
+  dispatch({
+    type: UPDATE_NOTE,
     payload: newNotes,
   });
 };

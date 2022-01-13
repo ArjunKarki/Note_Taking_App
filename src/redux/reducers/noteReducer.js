@@ -1,4 +1,9 @@
-import {CREATE_NOTE, TOGGLE_ARCHIVE, TOGGLE_FAVOURITE} from '../const';
+import {
+  CREATE_NOTE,
+  TOGGLE_ARCHIVE,
+  TOGGLE_FAVOURITE,
+  UPDATE_NOTE,
+} from '../const';
 
 const INITIAL_STATE = {
   allNotes: [],
@@ -9,6 +14,7 @@ const noteReducer = (state = INITIAL_STATE, action) => {
     case CREATE_NOTE:
     case TOGGLE_FAVOURITE:
     case TOGGLE_ARCHIVE:
+    case UPDATE_NOTE:
       return {
         ...state,
         allNotes: action.payload,

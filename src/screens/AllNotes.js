@@ -6,14 +6,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import {NoteCard} from '../components';
 import {toggleArchive, toggleFavourite} from '../redux/actions/noteActions';
 
-const AllNotes = () => {
+const AllNotes = ({navigation}) => {
   const dispatch = useDispatch();
   const {colors, dark} = useTheme();
   const styles = getStyles(colors, dark);
   const {allNotes} = useSelector(state => state.notes);
   console.log(allNotes);
 
-  const onClickNote = note => {};
+  const onClickNote = note => {
+    navigation.navigate('CreateNote', {note});
+  };
   const onToggleFav = note => {
     dispatch(toggleFavourite(note));
   };
@@ -33,6 +35,7 @@ const AllNotes = () => {
         keyExtractor={(v, i) => v.id}
         data={allNotes.filter(note => !note.is_archive) || []}
         renderItem={renderNotes}
+        style={{paddingHorizontal: 12}}
         columnWrapperStyle={{justifyContent: 'space-between', marginTop: 10}}
       />
     </View>
@@ -46,6 +49,5 @@ const getStyles = (colors, isDark) =>
     container: {
       backgroundColor: colors.background,
       flex: 1,
-      paddingHorizontal: 12,
     },
   });
