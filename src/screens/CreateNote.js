@@ -13,7 +13,7 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import utils from '../utilities/utils';
 import {useTheme} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {saveNote, updateNote} from '../redux/actions/noteActions';
+import {deleteNote, saveNote, updateNote} from '../redux/actions/noteActions';
 
 const CreateNote = ({navigation, route}) => {
   const {allNotes} = useSelector(state => state.notes);
@@ -41,6 +41,7 @@ const CreateNote = ({navigation, route}) => {
   };
 
   const onDelete = () => {
+    dispatch(deleteNote(oldNote.id));
     goBack();
   };
 

@@ -7,3 +7,5 @@ export const TOGGLE_FAVOURITE = 'TOGGLE_FAVOURITE';
 export const TOGGLE_ARCHIVE = 'TOGGLE_ARCHIVE';
 
 export const UPDATE_NOTE = 'UPDATE_NOTE';
+
+export const DELETE_NOTE = 'DELETE_NOTE';

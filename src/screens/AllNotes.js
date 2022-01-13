@@ -11,7 +11,6 @@ const AllNotes = ({navigation}) => {
   const {colors, dark} = useTheme();
   const styles = getStyles(colors, dark);
   const {allNotes} = useSelector(state => state.notes);
-  console.log(allNotes);
 
   const onClickNote = note => {
     navigation.navigate('CreateNote', {note});

@@ -1,4 +1,9 @@
-import {CREATE_NOTE, TOGGLE_FAVOURITE, UPDATE_NOTE} from '../const';
+import {
+  CREATE_NOTE,
+  DELETE_NOTE,
+  TOGGLE_FAVOURITE,
+  UPDATE_NOTE,
+} from '../const';
 
 export const saveNote = note => (dispatch, getState) => {
   let {
@@ -67,5 +72,16 @@ export const updateNote = (title, body, id) => (dispatch, getState) => {
   dispatch({
     type: UPDATE_NOTE,
     payload: newNotes,
+  });
+};
+
+export const deleteNote = id => (dispatch, getState) => {
+  let {
+    notes: {allNotes},
+  } = getState();
+
+  dispatch({
+    type: DELETE_NOTE,
+    payload: allNotes.filter(note => note.id != id),
   });
 };

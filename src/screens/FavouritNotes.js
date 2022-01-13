@@ -5,13 +5,15 @@ import {useDispatch, useSelector} from 'react-redux';
 import {NoteCard} from '../components';
 import {toggleFavourite} from '../redux/actions/noteActions';
 
-const FavouriteNote = () => {
+const FavouriteNote = ({navigation}) => {
   const dispatch = useDispatch();
   const {colors, dark} = useTheme();
   const styles = getStyles(colors, dark);
   const {allNotes} = useSelector(state => state.notes);
 
-  const onClickNote = note => {};
+  const onClickNote = note => {
+    navigation.navigate('CreateNote', {note});
+  };
   const onToggleFav = note => {
     dispatch(toggleFavourite(note));
   };

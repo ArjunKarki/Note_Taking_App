@@ -1,5 +1,6 @@
 import {
   CREATE_NOTE,
+  DELETE_NOTE,
   TOGGLE_ARCHIVE,
   TOGGLE_FAVOURITE,
   UPDATE_NOTE,
@@ -15,8 +16,8 @@ const noteReducer = (state = INITIAL_STATE, action) => {
     case TOGGLE_FAVOURITE:
     case TOGGLE_ARCHIVE:
     case UPDATE_NOTE:
+    case DELETE_NOTE:
       return {
-        ...state,
         allNotes: action.payload,
       };
 
