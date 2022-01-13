@@ -2,18 +2,21 @@ import {useTheme} from '@react-navigation/native';
 import React from 'react';
 import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Text} from 'react-native-paper';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {NoteCard} from '../components';
+import {toggleFavourite} from '../redux/actions/noteActions';
 
 const AllNotes = () => {
+  const dispatch = useDispatch();
   const {colors, dark} = useTheme();
   const styles = getStyles(colors, dark);
   const {allNotes} = useSelector(state => state.notes);
-
   console.log(allNotes);
 
   const onClickNote = note => {};
-  const onToggleFav = note => {};
+  const onToggleFav = note => {
+    dispatch(toggleFavourite(note));
+  };
 
   const renderNotes = ({item, index}) => (
     <NoteCard

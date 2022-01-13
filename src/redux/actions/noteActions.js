@@ -1,4 +1,4 @@
-import {CREATE_NOTE} from '../const';
+import {CREATE_NOTE, TOGGLE_FAVOURITE} from '../const';
 
 export const saveNote = (title, body) => (dispatch, getState) => {
   let {
@@ -17,5 +17,22 @@ export const saveNote = (title, body) => (dispatch, getState) => {
   dispatch({
     type: CREATE_NOTE,
     payload: [...allNotes, note],
+  });
+};
+
+export const toggleFavourite = note => (dispatch, getState) => {
+  let {
+    notes: {allNotes},
+  } = getState();
+  let newNotes = allNotes.map((item, index) => {
+    if (item.id == note.id) {
+      return {...item, is_favourite: !item.is_favourite};
+    }
+    return {...item};
+  });
+
+  dispatch({
+    type: TOGGLE_FAVOURITE,
+    payload: newNotes,
   });
 };

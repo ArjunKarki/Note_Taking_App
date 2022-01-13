@@ -23,9 +23,9 @@ const NoteCard = ({notes, onPress, toggleFav}) => {
         </Text>
         <TouchableOpacity onPress={toggleFav}>
           {is_favourite ? (
-            <MIcon name="bookmark" size={20} color={colors.main} />
+            <MIcon name="bookmark" size={20} color={'#1D9457'} />
           ) : (
-            <MIcon name="bookmark-border" size={20} color={colors.main} />
+            <MIcon name="bookmark-border" size={20} color={'#1D9457'} />
           )}
         </TouchableOpacity>
       </View>
