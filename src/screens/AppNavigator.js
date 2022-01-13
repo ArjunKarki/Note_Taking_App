@@ -95,7 +95,10 @@ const AppNavigator = () => {
   return (
     <PaperProvider theme={theme}>
       <View style={{flex: 1}}>
-        <StatusBar barStyle={'light-content'} />
+        <StatusBar
+          backgroundColor={theme.colors.main}
+          barStyle="light-content"
+        />
         <NavigationContainer theme={theme}>
           <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="home" component={HomeTabs} />

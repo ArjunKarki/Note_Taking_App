@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {
   Keyboard,
   SafeAreaView,
+  StatusBar,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -79,6 +80,10 @@ const CreateNote = ({navigation, route}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar
+        backgroundColor={colors.background}
+        barStyle={dark ? 'light-content' : 'dark-content'}
+      />
       <View style={styles.header}>
         <TouchableOpacity onPress={goBack} style={{flex: 1}}>
           <MIcon name="arrow-back-ios" color={colors.text} size={20} />
@@ -130,7 +135,6 @@ const CreateNote = ({navigation, route}) => {
           )}
         </View>
       </View>
-
       <View style={styles.contentView}>
         {note && (
           <View>
