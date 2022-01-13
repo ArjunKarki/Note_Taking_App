@@ -12,8 +12,11 @@ import MIcon from 'react-native-vector-icons/MaterialIcons';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import utils from '../utilities/utils';
 import {useTheme} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {saveNote} from '../redux/actions/noteActions';
 
 const CreateNote = ({navigation}) => {
+  const dispatch = useDispatch();
   const {colors, dark} = useTheme();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -30,6 +33,7 @@ const CreateNote = ({navigation}) => {
   const onSave = () => {
     Keyboard.dismiss();
     setFocus(false);
+    dispatch(saveNote(title, body));
   };
 
   return (
