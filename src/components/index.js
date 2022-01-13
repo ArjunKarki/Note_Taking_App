@@ -1,2 +1,3 @@
+import EmptyMessage from './EmptyMessage';
 import NoteCard from './NoteCard';
-export {NoteCard};
+export {NoteCard, EmptyMessage};

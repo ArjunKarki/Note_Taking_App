@@ -3,7 +3,7 @@ import React from 'react';
 import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Text} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
-import {NoteCard} from '../components';
+import {EmptyMessage, NoteCard} from '../components';
 import {toggleArchive, toggleFavourite} from '../redux/actions/noteActions';
 
 const AllNotes = ({navigation}) => {
@@ -30,10 +30,12 @@ const AllNotes = ({navigation}) => {
   return (
     <View style={styles.container}>
       <FlatList
+        ListEmptyComponent={<EmptyMessage message={'No Note Yet!'} />}
         numColumns={2}
         keyExtractor={(v, i) => v.id}
         data={allNotes.filter(note => !note.is_archive) || []}
         renderItem={renderNotes}
+        contentContainerStyle={{flexGrow: 1}}
         style={{paddingHorizontal: 12, marginTop: 10}}
         columnWrapperStyle={{justifyContent: 'space-between'}}
       />

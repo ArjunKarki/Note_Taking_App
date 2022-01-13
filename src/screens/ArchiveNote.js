@@ -2,7 +2,7 @@ import {useTheme} from '@react-navigation/native';
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {NoteCard} from '../components';
+import {EmptyMessage, NoteCard} from '../components';
 import {toggleArchive, toggleFavourite} from '../redux/actions/noteActions';
 
 const ArchiveNote = ({navigation}) => {
@@ -31,9 +31,12 @@ const ArchiveNote = ({navigation}) => {
     <View style={styles.container}>
       <FlatList
         numColumns={2}
+        ListEmptyComponent={<EmptyMessage message={'No Archived Note yet!'} />}
         keyExtractor={(v, i) => v.id}
         data={allNotes.filter(note => note.is_archive) || []}
         renderItem={renderNotes}
+        contentContainerStyle={{flexGrow: 1}}
+        style={{paddingHorizontal: 12, marginTop: 10}}
         columnWrapperStyle={{justifyContent: 'space-between', marginTop: 10}}
       />
     </View>
@@ -47,6 +50,5 @@ const getStyles = (colors, isDark) =>
     container: {
       backgroundColor: colors.background,
       flex: 1,
-      paddingHorizontal: 12,
     },
   });

@@ -2,7 +2,7 @@ import {useTheme} from '@react-navigation/native';
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {NoteCard} from '../components';
+import {EmptyMessage, NoteCard} from '../components';
 import {toggleFavourite} from '../redux/actions/noteActions';
 
 const FavouriteNote = ({navigation}) => {
@@ -29,10 +29,13 @@ const FavouriteNote = ({navigation}) => {
   return (
     <View style={styles.container}>
       <FlatList
+        ListEmptyComponent={<EmptyMessage message={'No Favourite Note Yet!'} />}
         numColumns={2}
         keyExtractor={(v, i) => v.id}
         data={allNotes.filter(note => note.is_favourite) || []}
         renderItem={renderNotes}
+        contentContainerStyle={{flexGrow: 1}}
+        style={{paddingHorizontal: 12, marginTop: 10}}
         columnWrapperStyle={{justifyContent: 'space-between', marginTop: 10}}
       />
     </View>
@@ -46,6 +49,5 @@ const getStyles = (colors, isDark) =>
     container: {
       backgroundColor: colors.background,
       flex: 1,
-      paddingHorizontal: 12,
     },
   });

@@ -7,7 +7,7 @@ import utils from '../utilities/utils';
 const NoteCard = ({notes, onPress, toggleFav, togleArchive}) => {
   const {colors, dark} = useTheme();
   const styles = getStyles(colors, dark);
-  let {title, body, is_favourite, created_at, updated_at, is_archive} = notes;
+  let {title, body, is_favourite, created_at, updated_at} = notes;
   let time = updated_at ? updated_at : created_at;
 
   return (
