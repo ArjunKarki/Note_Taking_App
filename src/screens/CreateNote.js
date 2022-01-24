@@ -49,7 +49,7 @@ const CreateNote = ({navigation, route}) => {
   };
 
   const requestDelete = () => {
-    Alert.alert('Sure to delete not?', '', [
+    Alert.alert('Sure to delete note?', '', [
       {
         text: 'Cancel',
         onPress: () => console.log('Cancel Pressed'),
